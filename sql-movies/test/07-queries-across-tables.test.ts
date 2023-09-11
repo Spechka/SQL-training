@@ -89,7 +89,7 @@ describe("Queries Across Tables", () => {
   );
 
   it(
-    "should select one movie which has highest count of actors",
+    "should select all movies called Life and return amount of actors",
     async done => {
       const query = `todo`;
       const result = await db.selectSingleRow(query);

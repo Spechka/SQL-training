@@ -30,7 +30,7 @@ describe("Simple Queries", () => {
       const query = `todo`;
       const result = await db.selectSingleRow(query);
 
-      expect(result.count).toBe(116);
+      expect(result.count).toBe(87);
 
       done();
     },
