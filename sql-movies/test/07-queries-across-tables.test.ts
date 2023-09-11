@@ -16,16 +16,16 @@ describe("Queries Across Tables", () => {
 
       expect(result).toEqual([
         {
-          director: "Steven Spielberg",
-          total_budget: 2173663066.68
-        },
-        {
           director: "Ridley Scott",
-          total_budget: 1740157354.14
+          total_budget: 722882143.58
         },
         {
           director: "Michael Bay",
-          total_budget: 1501996071.5
+          total_budget: 518297522.1
+        },
+        {
+          director: "David Yates",
+          total_budget: 504100108.5
         }
       ]);
 
@@ -43,43 +43,43 @@ describe("Queries Across Tables", () => {
       expect(result).toEqual([
         {
           keyword: "woman director",
-          count: 411
+          count: 162
         },
         {
           keyword: "independent film",
-          count: 394
+          count: 115
         },
         {
           keyword: "based on novel",
-          count: 278
+          count: 85
         },
         {
-          keyword: "sex",
-          count: 272
-        },
-        {
-          keyword: "sport",
-          count: 216
-        },
-        {
-          keyword: "murder",
-          count: 204
-        },
-        {
-          keyword: "musical",
-          count: 169
+          keyword: "duringcreditsstinger",
+          count: 82
         },
         {
           keyword: "biography",
-          count: 168
+          count: 78
         },
         {
-          keyword: "new york",
-          count: 163
+          keyword: "murder",
+          count: 66
         },
         {
-          keyword: "suspense",
-          count: 157
+          keyword: "sex",
+          count: 60
+        },
+        {
+          keyword: "revenge",
+          count: 51
+        },
+        {
+          keyword: "sport",
+          count: 50
+        },
+        {
+          keyword: "high school",
+          count: 48
         }
       ]);
 
@@ -95,8 +95,8 @@ describe("Queries Across Tables", () => {
       const result = await db.selectSingleRow(query);
 
       expect(result).toEqual({
-        original_title: "Hamlet",
-        count: 20
+        original_title: "Life",
+        count: 12
       });
 
       done();
@@ -113,15 +113,15 @@ describe("Queries Across Tables", () => {
       expect(result).toEqual([
         {
           genre: "Drama",
-          five_stars_count: 143663
+          five_stars_count: 15052
         },
         {
           genre: "Thriller",
-          five_stars_count: 96265
+          five_stars_count: 11771
         },
         {
-          genre: "Comedy",
-          five_stars_count: 81184
+          genre: "Crime",
+          five_stars_count: 8670
         }
       ]);
 
@@ -138,16 +138,16 @@ describe("Queries Across Tables", () => {
 
       expect(result).toEqual([
         {
-          genre: "Western",
-          avg_rating: 3.64
-        },
-        {
           genre: "Crime",
-          avg_rating: 3.62
+          avg_rating: 3.79
         },
         {
-          genre: "Animation",
-          avg_rating: 3.6
+          genre: "Music",
+          avg_rating: 3.73
+        },
+        {
+          genre: "Documentary",
+          avg_rating: 3.71
         }
       ]);
 

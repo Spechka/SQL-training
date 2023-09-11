@@ -15,8 +15,8 @@ describe("Simple Queries", () => {
       const result = await db.selectSingleRow(query);
 
       expect(result).toEqual({
-        total_budget: 190130349695.48,
-        total_revenue: 555818960433.08
+        total_budget: 53668223285.94,
+        total_revenue: 148342748033.4
       });
 
       done();
@@ -30,7 +30,7 @@ describe("Simple Queries", () => {
       const query = `todo`;
       const result = await db.selectSingleRow(query);
 
-      expect(result.count).toBe(282);
+      expect(result.count).toBe(116);
 
       done();
     },
@@ -50,14 +50,14 @@ describe("Simple Queries", () => {
           revenue: 11087569.0
         },
         {
-          original_title: "Pirates of the Caribbean: On Stranger Tides",
-          budget: 380000000.0,
-          revenue: 1021683000.0
+          original_title: "Avengers: Age of Ultron",
+          budget: 280000000,
+          revenue: 1405035767
         },
         {
-          original_title: "Pirates of the Caribbean: At World's End",
-          budget: 300000000.0,
-          revenue: 961000000.0
+          original_title: "Tangled",
+          budget: 260000000,
+          revenue: 591794936
         }
       ]);
 
@@ -72,7 +72,7 @@ describe("Simple Queries", () => {
       const query = `todo`;
       const result = await db.selectSingleRow(query);
 
-      expect(result.count).toBe(82);
+      expect(result.count).toBe(42);
 
       done();
     },
@@ -85,7 +85,7 @@ describe("Simple Queries", () => {
       const query = `todo`;
       const result = await db.selectMultipleRows(query);
 
-      expect(result.length).toBe(56);
+      expect(result.length).toBe(8);
       expect(result.slice(0, 3)).toEqual([
         {
           count: 627,
@@ -96,8 +96,8 @@ describe("Simple Queries", () => {
           year: "2014"
         },
         {
-          count: 656,
-          year: "2013"
+          count: 487,
+          year: "2010"
         }
       ]);
 
@@ -115,15 +115,15 @@ describe("Simple Queries", () => {
       expect(result).toEqual([
         {
           user_id: 8659,
-          count: 349
+          count: 48
+        },
+        {
+          user_id: 45811,
+          count: 45
         },
         {
           user_id: 179792,
-          count: 313
-        },
-        {
-          user_id: 107720,
-          count: 294
+          count: 40
         }
       ]);
 
@@ -140,51 +140,51 @@ describe("Simple Queries", () => {
 
       expect(result).toEqual([
         {
-          count: 161252,
+          count: 16521,
           month: "11"
         },
         {
-          count: 146804,
+          count: 16479,
           month: "12"
         },
         {
-          count: 144545,
-          month: "07"
-        },
-        {
-          count: 141643,
+          count: 15175,
           month: "10"
         },
         {
-          count: 136058,
-          month: "06"
-        },
-        {
-          count: 131934,
+          count: 14619,
           month: "01"
         },
         {
-          count: 130411,
-          month: "05"
+          count: 14557,
+          month: "07"
         },
         {
-          count: 129070,
+          count: 14080,
           month: "03"
         },
         {
-          count: 127299,
+          count: 13655,
+          month: "06"
+        },
+        {
+          count: 13071,
+          month: "05"
+        },
+        {
+          count: 12812,
           month: "08"
         },
         {
-          count: 119368,
+          count: 12623,
           month: "04"
         },
         {
-          count: 108811,
+          count: 11765,
           month: "02"
         },
         {
-          count: 103819,
+          count: 10502,
           month: "09"
         }
       ]);

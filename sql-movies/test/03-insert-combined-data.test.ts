@@ -36,14 +36,14 @@ describe("Insert Combined Data", () => {
       }
 
       const count = await db.selectSingleRow(selectCount(MOVIE_RATINGS));
-      expect(count.c).toBe(1581014);
+      expect(count.c).toBe(165859);
 
-      const row = await db.selectSingleRow(selectRatingsByUserID(107897));
+      const row = await db.selectSingleRow(selectRatingsByUserID(2));
 
       expect(row.id).not.toBeNaN();
-      expect(row.user_id).toBe(107897);
-      expect(row.rating).toBe(2.1);
-      expect(row.time_created).toBe("2002-07-19 09:17:07");
+      expect(row.user_id).toBe(2);
+      expect(row.rating).toBe(3.0);
+      expect(row.time_created).toBe("1997-06-23 04:12:48");
 
       done();
     },

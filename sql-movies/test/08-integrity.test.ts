@@ -108,7 +108,7 @@ describe("Foreign Keys", () => {
   it(
     "should not be able delete movie if there are any linked data present",
     async done => {
-      const movieId = 3886;
+      const movieId = 100;
       const query = `delete movie by id`;
       try {
         await db.delete(query);

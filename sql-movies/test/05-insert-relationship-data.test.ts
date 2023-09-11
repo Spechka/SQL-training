@@ -92,18 +92,18 @@ describe("Insert Relationship Data", () => {
       }
 
       const count = await db.selectSingleRow(selectCount(MOVIE_GENRES));
-      expect(count.c).toBe(26832);
+      expect(count.c).toBe(7141); 
 
-      const movie = await db.selectSingleRow(selectMovie("tt0884328"));
-      expect(movie.original_title).toBe("The Mist");
+      const movie = await db.selectSingleRow(selectMovie("tt2908446"));
+      expect(movie.original_title).toBe("Insurgent");
 
       const genres = await db.selectMultipleRows(
         selectGenresByMovieId(movie.id as number)
       );
       expect(genres).toEqual([
+        { genre: "Adventure" },
         { genre: "Science Fiction" },
-        { genre: "Thriller" },
-        { genre: "Horror" }
+        { genre: "Thriller" }
       ]);
 
       done();
@@ -128,20 +128,20 @@ describe("Insert Relationship Data", () => {
       }
 
       const count = await db.selectSingleRow(selectCount(MOVIE_ACTORS));
-      expect(count.c).toBe(52319);
+      expect(count.c).toBe(14306);
 
-      const movie = await db.selectSingleRow(selectMovie("tt0080707"));
-      expect(movie.original_title).toBe("The Exterminator");
+      const movie = await db.selectSingleRow(selectMovie("tt3659388"));
+      expect(movie.original_title).toBe("The Martian");
 
       const actors = await db.selectMultipleRows(
         selectActorsByMovieId(movie.id as number)
       );
       expect(actors).toEqual([
-        { full_name: "Christopher George" },
-        { full_name: "Steve James" },
-        { full_name: "Samantha Eggar" },
-        { full_name: "Robert Ginty" },
-        { full_name: "Tony DiBenedetto" }
+        { full_name: "Matt Damon" },
+        { full_name: "Jessica Chastain" },
+        { full_name: "Kristen Wiig" },
+        { full_name: "Jeff Daniels" },
+        { full_name: "Michael PeÃ±a" }
       ]);
 
       done();
@@ -170,15 +170,15 @@ describe("Insert Relationship Data", () => {
       }
 
       const count = await db.selectSingleRow(selectCount(MOVIE_DIRECTORS));
-      expect(count.c).toBe(11840);
+      expect(count.c).toBe(3340);
 
-      const movie = await db.selectSingleRow(selectMovie("tt0072856"));
-      expect(movie.original_title).toBe("Death Race 2000");
+      const movie = await db.selectSingleRow(selectMovie("tt2488496"));
+      expect(movie.original_title).toBe("Star Wars: The Force Awakens");
 
       const directors = await db.selectMultipleRows(
         selectDirectorsByMovieId(movie.id as number)
       );
-      expect(directors).toEqual([{ full_name: "Paul Bartel" }]);
+      expect(directors).toEqual([{ full_name: "J.J. Abrams" }]);
 
       done();
     },
@@ -202,7 +202,7 @@ describe("Insert Relationship Data", () => {
       }
 
       const count = await db.selectSingleRow(selectCount(MOVIE_KEYWORDS));
-      expect(count.c).toBe(37303);
+      expect(count.c).toBe(9568);
 
       const movie = await db.selectSingleRow(selectMovie("tt2820852"));
       expect(movie.original_title).toBe("Furious 7");
@@ -251,7 +251,7 @@ describe("Insert Relationship Data", () => {
       const count = await db.selectSingleRow(
         selectCount(MOVIE_PRODUCTION_COMPANIES)
       );
-      expect(count.c).toBe(23146);
+      expect(count.c).toBe(7017);
 
       const movie = await db.selectSingleRow(selectMovie("tt0133046"));
       expect(movie.original_title).toBe("Teaching Mrs. Tingle");

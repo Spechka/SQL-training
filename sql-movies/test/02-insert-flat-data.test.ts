@@ -68,7 +68,7 @@ describe("Insert Flat Data", () => {
       }
 
       const count = await db.selectSingleRow(selectCount(ACTORS));
-      expect(count.c).toBe(18951);
+      expect(count.c).toBe(7617);
 
       const actor = await db.selectSingleRow(selectActorByName("Tom Hardy"));
       expect(actor.id).not.toBeNaN();
@@ -90,7 +90,7 @@ describe("Insert Flat Data", () => {
       }
 
       const count = await db.selectSingleRow(selectCount(KEYWORDS));
-      expect(count.c).toBe(7859);
+      expect(count.c).toBe(3700);
 
       const row = await db.selectSingleRow(selectKeyword("teddy bear"));
       expect(row.id).not.toBeNaN();
@@ -112,7 +112,7 @@ describe("Insert Flat Data", () => {
       }
 
       const count = await db.selectSingleRow(selectCount(DIRECTORS));
-      expect(count.c).toBe(5341);
+      expect(count.c).toBe(2499);
 
       const row = await db.selectSingleRow(selectDirector("Alan Taylor"));
       expect(row.id).not.toBeNaN();
@@ -153,7 +153,7 @@ describe("Insert Flat Data", () => {
       }
 
       const count = await db.selectSingleRow(selectCount(PRODUCTION_COMPANIES));
-      expect(count.c).toBe(7858);
+      expect(count.c).toBe(3429);
 
       const row = await db.selectSingleRow(
         selectProductionCompany("Universal Pictures")
@@ -177,11 +177,11 @@ describe("Insert Flat Data", () => {
       }
 
       const count = await db.selectSingleRow(selectCount(MOVIES));
-      expect(count.c).toBe(10815);
+      expect(count.c).toBe(2998);
 
-      const row = await db.selectSingleRow(selectMovie("tt0479143"));
+      const row = await db.selectSingleRow(selectMovie("tt0369610"));
       expect(row.id).not.toBeNaN();
-      expect(row.original_title).toEqual("Rocky Balboa");
+      expect(row.original_title).toEqual("Jurassic World");
 
       done();
     },
