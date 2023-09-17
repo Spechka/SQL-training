@@ -10,73 +10,15 @@ import { Database } from "../src/database";
 import { tableInfo } from "../src/queries/table-info";
 import { minutes, Log } from "./utils";
 
-const CREATE_MOVIE_GENRES_TABLE = `
-  CREATE TABLE ${MOVIE_GENRES} (
-    movie_id integer NOT NULL,
-    genre_id integer NOT NULL,
-    PRIMARY KEY (movie_id, genre_id),
-    FOREIGN KEY (movie_id) REFERENCES Movies(id),
-    FOREIGN KEY (genre_id) REFERENCES Genres(id)
-  )`;
+const CREATE_MOVIE_GENRES_TABLE = ``;
 
-const CREATE_MOVIE_ACTORS_TABLE = `
-  CREATE TABLE ${MOVIE_ACTORS} (
-    movie_id integer NOT NULL,
-    actor_id integer NOT NULL,
-    PRIMARY KEY (movie_id, actor_id),
-    FOREIGN KEY (movie_id) REFERENCES Movies(id),
-    FOREIGN KEY (actor_id) REFERENCES Actors(id)
-  )`;
+const CREATE_MOVIE_ACTORS_TABLE = ``;
 
-const CREATE_MOVIE_DIRECTORS_TABLE = `
-  CREATE TABLE ${MOVIE_DIRECTORS} (
-    movie_id integer NOT NULL,
-    director_id integer NOT NULL,
-    PRIMARY KEY (movie_id, director_id),
-    FOREIGN KEY (movie_id) REFERENCES Movies(id),
-    FOREIGN KEY (director_id) REFERENCES Directors(id)
-  )`;
+const CREATE_MOVIE_DIRECTORS_TABLE = ``;
 
-const CREATE_MOVIE_KEYWORDS_TABLE = `
-  CREATE TABLE ${MOVIE_KEYWORDS} (
-    movie_id integer NOT NULL,
-    keyword_id integer NOT NULL,
-    PRIMARY KEY (movie_id, keyword_id),
-    FOREIGN KEY (movie_id) REFERENCES Movies(id),
-    FOREIGN KEY (keyword_id) REFERENCES Keywords(id)
-  )`;
+const CREATE_MOVIE_KEYWORDS_TABLE = ``;
 
-const CREATE_MOVIE_PRODUCTION_COMPANIES_TABLE = `
-  CREATE TABLE ${MOVIE_PRODUCTION_COMPANIES} (
-    movie_id integer NOT NULL,
-    company_id integer NOT NULL,
-    PRIMARY KEY (movie_id, company_id),
-    FOREIGN KEY (movie_id) REFERENCES Movies(id),
-    FOREIGN KEY (company_id) REFERENCES ProductionCompanies(id)
-  )`;
-
-const expectedColumns: Record<string, { name: string; type: string }[]> = {
-  [MOVIE_GENRES]: [
-    { name: "movie_id", type: "integer" },
-    { name: "genre_id", type: "integer" }
-  ],
-  [MOVIE_ACTORS]: [
-    { name: "movie_id", type: "integer" },
-    { name: "actor_id", type: "integer" }
-  ],
-  [MOVIE_DIRECTORS]: [
-    { name: "movie_id", type: "integer" },
-    { name: "director_id", type: "integer" }
-  ],
-  [MOVIE_KEYWORDS]: [
-    { name: "movie_id", type: "integer" },
-    { name: "keyword_id", type: "integer" }
-  ],
-  [MOVIE_PRODUCTION_COMPANIES]: [
-    { name: "movie_id", type: "integer" },
-    { name: "company_id", type: "integer" }
-  ]
-};
+const CREATE_MOVIE_PRODUCTION_COMPANIES_TABLE = ``;
 
 describe("Insert Combined Data", () => {
   let db: Database;
@@ -89,7 +31,7 @@ describe("Insert Combined Data", () => {
     return db.selectMultipleRows(tableInfo(table));
   };
 
-  it("should create tables to manage relationships", async (done) => {
+  it("should create tables to manage relationships", async done => {
     const queries = [
       CREATE_MOVIE_GENRES_TABLE,
       CREATE_MOVIE_ACTORS_TABLE,
@@ -111,7 +53,7 @@ describe("Insert Combined Data", () => {
     done();
   });
 
-  it("should have correct columns and column types", async (done) => {
+  it("should have correct columns and column types", async done => {
     const mapFn = (row: any) => {
       return {
         name: row.name,
@@ -119,16 +61,42 @@ describe("Insert Combined Data", () => {
       };
     };
 
-    // Iterate through the relationship tables and check their columns and types
-    for (const table of ALL_RELATIONSHIP_TABLES) {
-      const columns = (await selectTableInfo(table)).map(mapFn);
-      expect(columns).toEqual(expectedColumns[table]);
-    }
+    const genres = (await selectTableInfo(MOVIE_GENRES)).map(mapFn);
+    expect(genres).toEqual([
+      { name: "movie_id", type: "integer" },
+      { name: "genre_id", type: "integer" }
+    ]);
+
+    const actors = (await selectTableInfo(MOVIE_ACTORS)).map(mapFn);
+    expect(actors).toEqual([
+      { name: "movie_id", type: "integer" },
+      { name: "actor_id", type: "integer" }
+    ]);
+
+    const directors = (await selectTableInfo(MOVIE_DIRECTORS)).map(mapFn);
+    expect(directors).toEqual([
+      { name: "movie_id", type: "integer" },
+      { name: "director_id", type: "integer" }
+    ]);
+
+    const keywords = (await selectTableInfo(MOVIE_KEYWORDS)).map(mapFn);
+    expect(keywords).toEqual([
+      { name: "movie_id", type: "integer" },
+      { name: "keyword_id", type: "integer" }
+    ]);
+
+    const productionCompanies = (await selectTableInfo(
+      MOVIE_PRODUCTION_COMPANIES
+    )).map(mapFn);
+    expect(productionCompanies).toEqual([
+      { name: "movie_id", type: "integer" },
+      { name: "company_id", type: "integer" }
+    ]);
 
     done();
   });
 
-  it("should have primary keys", async (done) => {
+  it("should have primary keys", async done => {
     const mapFn = (row: any) => {
       return {
         name: row.name,
@@ -136,25 +104,42 @@ describe("Insert Combined Data", () => {
       };
     };
 
-    // Iterate through the relationship tables and check their primary keys
-    for (const table of ALL_RELATIONSHIP_TABLES) {
-      const columns = (await selectTableInfo(table)).map(mapFn);
-      const expectedPrimaryKeys = expectedColumns[table].filter((col) =>
-        col.name.endsWith("_id")
-      );
-      for (const col of columns) {
-        if (col.name.endsWith("_id")) {
-          expect(col.primaryKey).toBeTruthy();
-        } else {
-          expect(col.primaryKey).toBeFalsy();
-        }
-      }
-    }
+    const genres = (await selectTableInfo(MOVIE_GENRES)).map(mapFn);
+    expect(genres).toEqual([
+      { name: "movie_id", primaryKey: true },
+      { name: "genre_id", primaryKey: true }
+    ]);
+
+    const actors = (await selectTableInfo(MOVIE_ACTORS)).map(mapFn);
+    expect(actors).toEqual([
+      { name: "movie_id", primaryKey: true },
+      { name: "actor_id", primaryKey: true }
+    ]);
+
+    const directors = (await selectTableInfo(MOVIE_DIRECTORS)).map(mapFn);
+    expect(directors).toEqual([
+      { name: "movie_id", primaryKey: true },
+      { name: "director_id", primaryKey: true }
+    ]);
+
+    const keywords = (await selectTableInfo(MOVIE_KEYWORDS)).map(mapFn);
+    expect(keywords).toEqual([
+      { name: "movie_id", primaryKey: true },
+      { name: "keyword_id", primaryKey: true }
+    ]);
+
+    const productionCompanies = (await selectTableInfo(
+      MOVIE_PRODUCTION_COMPANIES
+    )).map(mapFn);
+    expect(productionCompanies).toEqual([
+      { name: "movie_id", primaryKey: true },
+      { name: "company_id", primaryKey: true }
+    ]);
 
     done();
   });
 
-  it("should have not null constraints", async (done) => {
+  it("should have not null constraints", async done => {
     const mapFn = (row: any) => {
       return {
         name: row.name,
@@ -162,13 +147,37 @@ describe("Insert Combined Data", () => {
       };
     };
 
-    // Iterate through the relationship tables and check their not null constraints
-    for (const table of ALL_RELATIONSHIP_TABLES) {
-      const columns = (await selectTableInfo(table)).map(mapFn);
-      for (const col of columns) {
-        expect(col.notNull).toBeTruthy();
-      }
-    }
+    const genres = (await selectTableInfo(MOVIE_GENRES)).map(mapFn);
+    expect(genres).toEqual([
+      { name: "movie_id", notNull: true },
+      { name: "genre_id", notNull: true }
+    ]);
+
+    const actors = (await selectTableInfo(MOVIE_ACTORS)).map(mapFn);
+    expect(actors).toEqual([
+      { name: "movie_id", notNull: true },
+      { name: "actor_id", notNull: true }
+    ]);
+
+    const directors = (await selectTableInfo(MOVIE_DIRECTORS)).map(mapFn);
+    expect(directors).toEqual([
+      { name: "movie_id", notNull: true },
+      { name: "director_id", notNull: true }
+    ]);
+
+    const productionCompanies = (await selectTableInfo(
+      MOVIE_PRODUCTION_COMPANIES
+    )).map(mapFn);
+    expect(productionCompanies).toEqual([
+      { name: "movie_id", notNull: true },
+      { name: "company_id", notNull: true }
+    ]);
+
+    const keywords = (await selectTableInfo(MOVIE_KEYWORDS)).map(mapFn);
+    expect(keywords).toEqual([
+      { name: "movie_id", notNull: true },
+      { name: "keyword_id", notNull: true }
+    ]);
 
     done();
   });

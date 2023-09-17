@@ -16,8 +16,7 @@ import {
   DIRECTORS,
   GENRES,
   PRODUCTION_COMPANIES,
-  MOVIES,
-  MOVIE_PRODUCTION_COMPANIES
+  MOVIES
 } from "../src/table-names";
 import { Movie } from "../src/data/types";
 import { escape } from "../src/utils";
@@ -31,47 +30,23 @@ const insertActors = (actors: string[]) => {
 };
 
 const insertKeywords = (keywords: string[]) => {
-  return (
-    `insert into ${KEYWORDS} (keyword) values` +
-    keywords.map(keyword => `('${escape(keyword)}')`).join(",")
-  );
+  throw new Error(`todo`);
 };
 
 const insertDirectors = (directors: string[]) => {
-  return (
-    `insert into ${DIRECTORS} (full_name) values` +
-    directors.map(director => `('${escape(director)}')`).join(",")
-  );
+  throw new Error(`todo`);
 };
 
 const insertGenres = (genres: string[]) => {
-  return (
-    `insert into ${GENRES} (genre) values` +
-    genres.map(genre => `('${genre}')`).join(",")
-  );
+  throw new Error(`todo`);
 };
 
 const insertProductionCompanies = (companies: string[]) => {
-  return (
-    `insert into ${PRODUCTION_COMPANIES} (company_name) values` +
-    companies.map(company => `('${escape(company)}')`).join(",")
-  );
+  throw new Error(`todo`);
 };
 
 const insertMovies = (movies: Movie[]) => {
-  return (
-    `insert into ${MOVIES} (imdb_id, popularity, budget, budget_adjusted, revenue, revenue_adjusted, original_title, homepage, tagline, overview, runtime, release_date) values` +
-    movies
-      .map(
-        (movie) =>
-          `('${movie.imdbId}', ${movie.popularity}, ${movie.budget}, ${movie.budgetAdjusted}, ${movie.revenue}, ${movie.revenueAdjusted}, '${escape(
-            movie.originalTitle
-          )}', '${escape(movie.homepage)}', '${escape(movie.tagline || '')}', '${escape(
-            movie.overview
-          )}', ${movie.runtime}, '${movie.releaseDate}')`
-      )
-      .join(",")
-  );
+  throw new Error(`todo`);
 };
 
 describe("Insert Flat Data", () => {
