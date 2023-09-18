@@ -57,7 +57,8 @@ const CREATE_GENRES_TABLE = `CREATE TABLE ${GENRES} (
 
 const CREATE_PRODUCTION_COMPANIES_TABLE = `CREATE TABLE ${PRODUCTION_COMPANIES} (
   id integer NOT NULL PRIMARY KEY,
-  company_name text NOT NULL
+  company_name text NOT NULL,
+  FOREIGN KEY (id) REFERENCES movie_production_companies(company_id)
 )`;
 
 const CREATE_INDEX_MOVIES_RELEASE_DATE = `CREATE INDEX movies_release_date_idx ON ${MOVIES} (release_date);`;

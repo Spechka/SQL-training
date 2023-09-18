@@ -45,12 +45,9 @@ describe("Simple Queries", () => {
     "should select top three movies order by budget where release data is after 2009",
     async done => {
       const query = `
-      SELECT budget, original_title, revenue
-      FROM(
-        SELECT * FROM ${MOVIES} 
-        ORDER BY budget DESC
-        )
+      SELECT budget, original_title, revenue FROM ${MOVIES} 
       WHERE release_date > 2009
+      ORDER BY budget DESC
       LIMIT 3`;
       const result = await db.selectMultipleRows(query);
 
